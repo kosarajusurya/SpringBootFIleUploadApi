@@ -12,7 +12,7 @@ This is a spring boot application and will automatically launch embedded tomcat.
 
 API can be accessed at : localhost:8080/app/v1/file
 
-* #Upload File : localhost:8080/app/v1/file
+* _Upload File : localhost:8080/app/v1/file?file={file}&uploadedBy={uploadedBy}&date={date} POST
     * HTTP Method : POST
     * Request Params :
          1) file : Multipart file
