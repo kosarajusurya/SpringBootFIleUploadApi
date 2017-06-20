@@ -3,6 +3,9 @@ Sample Spring boot application with REST API for uploading,search and get specif
 
 # Build and Run
 Download the project to eclipse or cd SpringBootFileUploadApi
+   
+   # Update application.properties file under resources to appropriate propeties. These propeties are used in scheduler
+      
 ```sh
 mvn package
 java -jar target/solution-0.1.0.jar
