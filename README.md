@@ -8,7 +8,7 @@ Download the project to eclipse or cd SpringBootFileUploadApi
       
 ```sh
 mvn package
-java -jar target/solution-0.1.0.jar
+java -jar target/solution-0.0.1-SNAPSHOT.jar
 ```
 This is a spring boot application and will automatically launch embedded tomcat.
 
