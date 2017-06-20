@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import com.example.demo.service.FileInformation;
 import com.example.demo.service.FileMetaData;
@@ -89,6 +90,20 @@ public class FileUploadUtils {
 	       fileInfo.setFileData(Files.readAllBytes(path));
 	       return fileInfo;
 	}
+	
+	public static boolean isFileSystemUpdated(Date date) {
+		File file = new File(DIRECTORY);		
+		File [] directoryList = file.listFiles();
+		for(File fileFound : directoryList){			
+			long diff = date.getTime() - fileFound.lastModified();					
+			long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);					
+			if(minutes<60){				
+				return true;
+			}			
+		}
+ 		return false;
+	}
+
 
 	private static String getFilePath(FileMetaData metadata) {
 		String dirPath = getDirectoryPath(metadata.getFileId());
@@ -172,7 +187,6 @@ public class FileUploadUtils {
 			prop.load(input);
 		} 
 		return prop;
-	}
-
+	}	
 	
 }

@@ -39,7 +39,7 @@ public class FileUploadController {
 			@RequestParam(value = "uploadedBy", required = true) String uploadedBy,
 			@RequestParam(value = "date", required = true) @DateTimeFormat(pattern = "yyyy-MM-dd") Date date)
 			throws FileUploadException, IOException {
-		FileMetaData fileData = uploadService
+		FileMetaData fileData = getUploadService()
 				.save(new FileInformation(file.getBytes(), file.getOriginalFilename(), date, uploadedBy));
 		log.debug("Request to save file with name : "+ file.getOriginalFilename() +" uploaded by : "+ uploadedBy);
 		return new ResponseEntity<FileMetaData>(fileData, HttpStatus.OK);
@@ -49,13 +49,21 @@ public class FileUploadController {
 	public ResponseEntity<List<FileMetaData>> findDocument(
 			@RequestParam(value = "uploadedBy", required = false) String uploadedBy,
 			@RequestParam(value = "date", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) throws FileUploadException {		
-		return new ResponseEntity<List<FileMetaData>>(uploadService.findFiles(uploadedBy, date), HttpStatus.OK);
+		return new ResponseEntity<List<FileMetaData>>(getUploadService().findFiles(uploadedBy, date), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getDocument(@PathVariable String id) throws FileUploadException {		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-		return new ResponseEntity<byte[]>(uploadService.getFile(id), httpHeaders, HttpStatus.OK);
+		return new ResponseEntity<byte[]>(getUploadService().getFile(id), httpHeaders, HttpStatus.OK);
+	}
+	
+	public IFileUploadService getUploadService() {
+		return uploadService;
+	}
+
+	public void setUploadService(IFileUploadService uploadService) {
+		this.uploadService = uploadService;
 	}
 }
