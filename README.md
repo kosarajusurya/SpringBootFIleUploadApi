@@ -3,22 +3,28 @@ Sample Spring boot application with REST API for uploading,search and get specif
 
 # Build and Run
 Download the project to eclipse or cd SpringBootFileUploadApi
+```sh
 mvn package
 java -jar target/solution-0.1.0.jar
-
+```
 This is a spring boot application and will automatically launch embedded tomcat.
 
 # API
 
 API can be accessed at : localhost:8080/app/v1/file
 
-* _ Upload File : localhost:8080/app/v1/file?file={file}&uploadedBy={uploadedBy}&date={date} POST_
+* _Upload File_: /app/v1/file?file={file}&uploadedBy={uploadedBy}&date={date} POST
     * HTTP Method : POST
     * Request Params :
          1) file : Multipart file
-         2) uploadedBy : String
-         3) date : createdDate
-  
-    
-
-
+         2) uploadedBy : name of the person uploading the file
+         3) date : file creation date
+    * Return type : File Meta Data
+* _Get File_: /app/v1/file/{id} GET
+    * HTTP Method : GET
+    * Path Param : File Id
+* _Search Files_ : /app/v1/file?uploadedBy={uploadedBy}&date={date} GET
+    * HTTP Method : GET
+    * Request Params :
+        1) uploadedBy : name of the person uploading the file
+        2) date : file creattion date
