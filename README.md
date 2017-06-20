@@ -34,3 +34,7 @@ API can be accessed at : localhost:8080/app/v1/file
         1) uploadedBy : name of the person uploading the file
         2) date : file creation date
     * Return type : List of file Meta Data
+    
+# Scheduler
+
+Spring CRON scheduler is used to check updates made in last hour. application.properties file needs to be updated to connect to SMTP host to send mails.
